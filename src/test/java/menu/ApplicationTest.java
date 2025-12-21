@@ -1,5 +1,6 @@
 package menu;
 
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -11,10 +12,13 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import menu.constant.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 
 public class ApplicationTest extends NsTest {
@@ -71,6 +75,65 @@ public class ApplicationTest extends NsTest {
                 );
             });
         }
+
+        @Test
+        void 코치_이름_형식_오류() {
+            assertSimpleTest(() -> {
+                runException("제이미-제이콥");
+                assertThat(output()).contains(ErrorMessage.FORMAT_ERROR.getErrorMessage());
+            });
+        }
+
+        @Test
+        void 코치_최소_인원_오류() {
+            assertSimpleTest(() -> {
+                runException("제이미");
+                assertThat(output()).contains(ErrorMessage.COACH_COUNT_MIN_ERROR.getErrorMessage());
+            });
+        }
+
+        @Test
+        void 코치_최대_인원_오류() {
+            assertSimpleTest(() -> {
+                runException("제이미,제이콥,포비,제임스,메시,사비");
+                assertThat(output()).contains(ErrorMessage.COACH_COUNT_MAX_ERROR.getErrorMessage());
+            });
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"이니에스타,메시", "홉,메시"})
+        void 코치_이름_길이_오류(String input) {
+            assertSimpleTest(() -> {
+                runException(input);
+                assertThat(output()).contains(ErrorMessage.COACH_NAME_LENGTH_ERROR.getErrorMessage());
+            });
+        }
+
+        @Test
+        void 코치별_못먹는_메뉴_형식_오류() {
+            assertSimpleTest(() -> {
+                runException("제이미,제이콥", "김밥-떡볶이");
+                assertThat(output()).contains(ErrorMessage.FORMAT_ERROR.getErrorMessage());
+            });
+        }
+
+        @Test
+        void 코치별_못먹는_메뉴_개수_초과_오류() {
+            assertSimpleTest(() -> {
+                runException("제이미,제이콥", "김밥,떡볶이,제육볶음");
+                assertThat(output()).contains(ErrorMessage.REJECTED_MENU_COUNT_ERROR.getErrorMessage());
+            });
+        }
+
+        @Test
+        void 코치별_못먹는_메뉴_존재_오류() {
+            assertSimpleTest(() -> {
+                runException("제이미,제이콥", "김밥,해장국");
+                assertThat(output()).contains(ErrorMessage.NO_EXIST_MENU_ERROR.getErrorMessage());
+            });
+        }
+
+
     }
 
     @Override
