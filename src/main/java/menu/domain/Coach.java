@@ -1,11 +1,13 @@
 package menu.domain;
 
 import static menu.constant.Constant.CATEGORIES;
+import static menu.constant.Constant.COACH_NAME_LENGTH_MIN;
 import static menu.constant.ErrorMessage.COACH_NAME_LENGTH_ERROR;
 import static menu.constant.ErrorMessage.NO_EXIST_MENU;
 
 import java.util.ArrayList;
 import java.util.List;
+import menu.constant.Constant;
 
 public class Coach {
 
@@ -25,7 +27,7 @@ public class Coach {
     }
 
     private static void validate(String name) {
-        if (name.length() < 2 || name.length() > 4) {
+        if (name.length() < COACH_NAME_LENGTH_MIN || name.length() > Constant.COACH_NAME_LENGTH_MAX) {
             throw new IllegalArgumentException(COACH_NAME_LENGTH_ERROR.getErrorMessage());
         }
     }
@@ -36,10 +38,6 @@ public class Coach {
 
     public List<String> getRecommendedMenus() {
         return recommendedMenus;
-    }
-
-    public List<String> getRejectedMenus() {
-        return rejectedMenus;
     }
 
     public void addRejectedMenus(List<String> rejectedMenus) {
@@ -61,7 +59,7 @@ public class Coach {
     }
 
     public boolean possible(String menu) {
-        return !recommendedMenus.contains(menu) || !rejectedMenus.contains(menu);
+        return !recommendedMenus.contains(menu) && !rejectedMenus.contains(menu);
     }
 
     public void addRecommendedMenu(String menu) {

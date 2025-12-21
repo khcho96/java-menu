@@ -6,6 +6,7 @@ import static menu.constant.ErrorMessage.FORMAT_ERROR;
 import static menu.constant.ErrorMessage.REJECTED_MENU_COUNT_ERROR;
 
 import java.util.List;
+import menu.constant.Constant;
 
 public final class Validator {
 
@@ -20,11 +21,11 @@ public final class Validator {
     }
 
     public static void validateCoachNames(List<String> names) {
-        if (names.size() < 2) {
+        if (names.size() < Constant.COACH_COUNT_MIN) {
             throw new IllegalArgumentException(COACH_COUNT_MIN_ERROR.getErrorMessage());
         }
 
-        if (names.size() > 5) {
+        if (names.size() > Constant.COACH_COUNT_MAX) {
             throw new IllegalArgumentException(COACH_COUNT_MAX_ERROR.getErrorMessage());
         }
     }
@@ -40,7 +41,7 @@ public final class Validator {
     }
 
     public static void validateRejectedMenus(List<String> menus) {
-        if (menus.size() > 2) {
+        if (menus.size() > Constant.REJECTED_MENU_COUNT_MAX) {
             throw new IllegalArgumentException(REJECTED_MENU_COUNT_ERROR.getErrorMessage());
         }
     }

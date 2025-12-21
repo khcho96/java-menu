@@ -13,4 +13,14 @@ public final class Constant {
             "아시안", List.of("팟타이", "카오 팟", "나시고렝", "파인애플 볶음밥", "쌀국수", "똠얌꿍", "반미", "월남쌈", "분짜"),
             "양식", List.of("라자냐", "그라탱", "뇨끼", "끼슈", "프렌치 토스트", "바게트", "스파게티", "피자", "파니니")
     );
+
+    public static final int COACH_NAME_LENGTH_MIN = 2;
+    public static final int COACH_NAME_LENGTH_MAX = 4;
+
+    public static final int RECOMMENDED_MENUS_SIZE = 5;
+
+    public static final int COACH_COUNT_MIN = 2;
+    public static final int COACH_COUNT_MAX = 5;
+
+    public static final int REJECTED_MENU_COUNT_MAX = 2;
 }
