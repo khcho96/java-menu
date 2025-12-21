@@ -16,9 +16,4 @@ public class Recommendation {
     public static Recommendation newInstance() {
         return new Recommendation();
     }
-
-    public void addCoach(String coachName) {
-        Coach coach = Coach.from(coachName);
-        coaches.add(coach);
-    }
 }

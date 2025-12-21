@@ -28,4 +28,16 @@ public class Coach {
             throw new IllegalArgumentException(COACH_NAME_LENGTH_ERROR.getErrorMessage());
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getRecommendedMenus() {
+        return recommendedMenus;
+    }
+
+    public List<String> getRejectedMenus() {
+        return rejectedMenus;
+    }
 }
