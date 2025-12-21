@@ -1,0 +1,21 @@
+package menu.constant;
+
+public enum ErrorMessage {
+
+    FORMAT_ERROR("입력 형식이 올바르지 않습니다."),
+    COACH_COUNT_MIN_ERROR("코치는 최소 2명 이상 입력해야 합니다."),
+    COACH_COUNT_MAX_ERROR("코치는 5명 이하로 입력해야 합니다."),
+    COACH_NAME_LENGTH_ERROR("코치의 이름은 2자 이상 4자 이하여야 합니다."),
+    ;
+
+    private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
+    private final String errorMessage;
+
+    ErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public String getErrorMessage(Object... args) {
+        return ERROR_MESSAGE_PREFIX + String.format(errorMessage, args);
+    }
+}
