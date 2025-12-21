@@ -1,6 +1,8 @@
 package menu.domain;
 
+import static menu.constant.Constant.CATEGORIES;
 import static menu.constant.ErrorMessage.COACH_NAME_LENGTH_ERROR;
+import static menu.constant.ErrorMessage.NO_EXIST_MENU;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,5 +41,26 @@ public class Coach {
 
     public List<String> getRejectedMenus() {
         return rejectedMenus;
+    }
+
+    public void addRejectedMenus(List<String> rejectedMenus) {
+        validateExistence(rejectedMenus);
+    }
+
+    private void validateExistence(List<String> rejectedMenus) {
+        int check = 0;
+        for (String rejectedMenu : rejectedMenus) {
+            for (String categoryName : CATEGORIES.keySet()) {
+                List<String> menus = CATEGORIES.get(categoryName);
+                if (menus.contains(rejectedMenu)) {
+                    check = 1;
+                    break;
+                }
+            }
+
+            if (check == 0) {
+                throw new IllegalArgumentException(NO_EXIST_MENU.getErrorMessage());
+            }
+        }
     }
 }

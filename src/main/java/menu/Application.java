@@ -37,11 +37,13 @@ public class Application {
         }
 
         List<Coach> coaches = coachesDto.getCoaches();
+
         for (Coach coach : coaches) {
             while (true) {
                 try {
                     String readRejectedMenus = InputView.readRejectedMenus(coach);
-
+                    List<String> rejectedMenus = InputParser.parseRejectedMenus(readRejectedMenus);
+                    coach.addRejectedMenus(rejectedMenus);
                     break;
                 } catch (IllegalArgumentException e) {
                     OutputView.printErrorMessage(e);

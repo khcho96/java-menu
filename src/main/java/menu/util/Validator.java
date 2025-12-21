@@ -3,6 +3,7 @@ package menu.util;
 import static menu.constant.ErrorMessage.COACH_COUNT_MAX_ERROR;
 import static menu.constant.ErrorMessage.COACH_COUNT_MIN_ERROR;
 import static menu.constant.ErrorMessage.FORMAT_ERROR;
+import static menu.constant.ErrorMessage.REJECTED_MENU_COUNT_ERROR;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public final class Validator {
 
     private Validator() {}
 
-    public static void validateCsvFormat(String input) {
+    public static void validateCoachNameFormat(String input) {
         if (!input.matches(CSV_FORMAT)) {
             throw new IllegalArgumentException(FORMAT_ERROR.getErrorMessage());
         }
@@ -25,6 +26,22 @@ public final class Validator {
 
         if (names.size() > 5) {
             throw new IllegalArgumentException(COACH_COUNT_MAX_ERROR.getErrorMessage());
+        }
+    }
+
+    public static void validateRejectedMenuFormat(String input) {
+        if (input.isBlank()) {
+            return;
+        }
+
+        if (!input.matches(CSV_FORMAT)) {
+            throw new IllegalArgumentException(FORMAT_ERROR.getErrorMessage());
+        }
+    }
+
+    public static void validateRejectedMenus(List<String> menus) {
+        if (menus.size() > 2) {
+            throw new IllegalArgumentException(REJECTED_MENU_COUNT_ERROR.getErrorMessage());
         }
     }
 }

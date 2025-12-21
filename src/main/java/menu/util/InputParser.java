@@ -1,6 +1,5 @@
 package menu.util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,7 +12,7 @@ public final class InputParser {
     }
 
     private static List<String> parseToElements(String rawInput) {
-        Validator.validateCsvFormat(rawInput.strip());
+        rawInput = rawInput.strip();
 
         return Stream.of(rawInput.split(DELIMITER))
                 .map(String::strip)
@@ -21,10 +20,22 @@ public final class InputParser {
     }
 
     public static List<String> parseCoachNames(String rawInput) {
+        Validator.validateCoachNameFormat(rawInput.strip());
+
         List<String> names = parseToElements(rawInput);
 
         Validator.validateCoachNames(names);
 
         return names;
+    }
+
+    public static List<String> parseRejectedMenus(String rawInput) {
+        Validator.validateRejectedMenuFormat(rawInput.strip());
+
+        List<String> menus = parseToElements(rawInput);
+
+        Validator.validateRejectedMenus(menus);
+
+        return menus;
     }
 }
