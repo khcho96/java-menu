@@ -44,6 +44,9 @@ public class Application {
                     String readRejectedMenus = InputView.readRejectedMenus(coach);
                     List<String> rejectedMenus = InputParser.parseRejectedMenus(readRejectedMenus);
                     coach.addRejectedMenus(rejectedMenus);
+
+
+
                     break;
                 } catch (IllegalArgumentException e) {
                     OutputView.printErrorMessage(e);

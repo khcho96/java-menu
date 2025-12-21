@@ -10,12 +10,11 @@ import java.util.List;
 public class Coach {
 
     private final String name;
-    private final List<String> rejectedMenus;
+    private List<String> rejectedMenus;
     private final List<String> recommendedMenus;
 
     private Coach(String name) {
         this.name = name;
-        this.rejectedMenus = new ArrayList<>();
         this.recommendedMenus = new ArrayList<>();
     }
 
@@ -44,23 +43,20 @@ public class Coach {
     }
 
     public void addRejectedMenus(List<String> rejectedMenus) {
-        validateExistence(rejectedMenus);
+        for (String rejectedMenu : rejectedMenus) {
+            validateExistence(rejectedMenu);
+        }
+        this.rejectedMenus = new ArrayList<>(rejectedMenus);
     }
 
-    private void validateExistence(List<String> rejectedMenus) {
-        int check = 0;
-        for (String rejectedMenu : rejectedMenus) {
-            for (String categoryName : CATEGORIES.keySet()) {
-                List<String> menus = CATEGORIES.get(categoryName);
-                if (menus.contains(rejectedMenu)) {
-                    check = 1;
-                    break;
-                }
-            }
-
-            if (check == 0) {
-                throw new IllegalArgumentException(NO_EXIST_MENU.getErrorMessage());
+    private void validateExistence(String rejectedMenu) {
+        for (String categoryName : CATEGORIES.keySet()) {
+            List<String> menus = CATEGORIES.get(categoryName);
+            if (menus.contains(rejectedMenu)) {
+                return;
             }
         }
+
+        throw new IllegalArgumentException(NO_EXIST_MENU.getErrorMessage());
     }
 }
