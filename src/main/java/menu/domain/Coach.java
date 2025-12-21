@@ -3,7 +3,7 @@ package menu.domain;
 import static menu.constant.Constant.CATEGORIES;
 import static menu.constant.Constant.COACH_NAME_LENGTH_MIN;
 import static menu.constant.ErrorMessage.COACH_NAME_LENGTH_ERROR;
-import static menu.constant.ErrorMessage.NO_EXIST_MENU;
+import static menu.constant.ErrorMessage.NO_EXIST_MENU_ERROR;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class Coach {
             }
         }
 
-        throw new IllegalArgumentException(NO_EXIST_MENU.getErrorMessage());
+        throw new IllegalArgumentException(NO_EXIST_MENU_ERROR.getErrorMessage());
     }
 
     public boolean possible(String menu) {
