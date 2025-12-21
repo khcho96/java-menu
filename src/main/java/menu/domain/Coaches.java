@@ -2,7 +2,8 @@ package menu.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import menu.dto.CoachesDto;
+import java.util.stream.Collectors;
+import menu.dto.CoachNamesDto;
 
 public class Coaches {
 
@@ -21,7 +22,23 @@ public class Coaches {
         coaches.add(coach);
     }
 
-    public CoachesDto getCoachesDto() {
-        return new CoachesDto(coaches);
+    public CoachNamesDto getCoachNamesDto() {
+        List<String> coachNames = coaches.stream()
+                .map(Coach::getName)
+                .collect(Collectors.toList());
+        return new CoachNamesDto(coachNames);
+    }
+
+    public Coach getCoach(String coachName) {
+        for (Coach coach : coaches) {
+            if (coach.getName().equals(coachName)) {
+                return coach;
+            }
+        }
+        return null;
+    }
+
+    public List<Coach> getCoaches() {
+        return coaches;
     }
 }

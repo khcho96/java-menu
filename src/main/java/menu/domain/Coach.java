@@ -59,4 +59,12 @@ public class Coach {
 
         throw new IllegalArgumentException(NO_EXIST_MENU.getErrorMessage());
     }
+
+    public boolean possible(String menu) {
+        return !recommendedMenus.contains(menu) || !rejectedMenus.contains(menu);
+    }
+
+    public void addRecommendedMenu(String menu) {
+        this.recommendedMenus.add(menu);
+    }
 }

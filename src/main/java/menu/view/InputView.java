@@ -13,8 +13,8 @@ public class InputView {
         return Console.readLine();
     }
 
-    public static String readRejectedMenus(Coach coach) {
-        System.out.printf(REJECTED_MENUS_REQUEST, coach.getName());
+    public static String readRejectedMenus(String coachName) {
+        System.out.printf(REJECTED_MENUS_REQUEST, coachName);
         return Console.readLine();
     }
 }
