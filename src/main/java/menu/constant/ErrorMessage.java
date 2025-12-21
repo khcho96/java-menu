@@ -7,7 +7,9 @@ public enum ErrorMessage {
     COACH_COUNT_MAX_ERROR("코치는 5명 이하로 입력해야 합니다."),
     COACH_NAME_LENGTH_ERROR("코치의 이름은 2자 이상 4자 이하여야 합니다."),
     REJECTED_MENU_COUNT_ERROR("못 먹는 메뉴의 개수는 2개 이하여야 합니다"),
-    NO_EXIST_MENU_ERROR("없는 메뉴입니다.")
+    NO_EXIST_MENU_ERROR("없는 메뉴입니다."),
+    NAME_UNIQUE_ERROR("중복된 이름이 있습니다."),
+    MENU_UNIQUE_ERROR("중복된 이름이 있습니다."),
     ;
 
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";

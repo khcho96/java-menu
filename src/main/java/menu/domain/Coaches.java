@@ -1,5 +1,7 @@
 package menu.domain;
 
+import static menu.constant.ErrorMessage.NAME_UNIQUE_ERROR;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +21,11 @@ public class Coaches {
 
     public void addCoach(String coachName) {
         Coach coach = Coach.from(coachName);
+
+        if (coaches.contains(coach)) {
+            throw new IllegalArgumentException(NAME_UNIQUE_ERROR.getErrorMessage());
+        }
+
         coaches.add(coach);
     }
 
