@@ -1,7 +1,6 @@
 package menu.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import menu.domain.Coach;
 
 public class InputView {
 

@@ -1,11 +1,7 @@
 package menu.domain;
 
-import static menu.constant.ErrorMessage.NAME_UNIQUE_ERROR;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import menu.dto.CoachNamesDto;
 
 public class Coaches {
 
@@ -21,19 +17,7 @@ public class Coaches {
 
     public void addCoach(String coachName) {
         Coach coach = Coach.from(coachName);
-
-        if (coaches.contains(coach)) {
-            throw new IllegalArgumentException(NAME_UNIQUE_ERROR.getErrorMessage());
-        }
-
         coaches.add(coach);
-    }
-
-    public CoachNamesDto getCoachNamesDto() {
-        List<String> coachNames = coaches.stream()
-                .map(Coach::getName)
-                .collect(Collectors.toList());
-        return new CoachNamesDto(coachNames);
     }
 
     public Coach getCoach(String coachName) {
@@ -42,7 +26,7 @@ public class Coaches {
                 return coach;
             }
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     public List<Coach> getCoaches() {

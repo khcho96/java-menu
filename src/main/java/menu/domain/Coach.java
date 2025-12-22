@@ -1,15 +1,14 @@
 package menu.domain;
 
-import static menu.constant.Constant.CATEGORIES;
-import static menu.constant.Constant.COACH_NAME_LENGTH_MIN;
-import static menu.constant.ErrorMessage.COACH_NAME_LENGTH_ERROR;
-import static menu.constant.ErrorMessage.NO_EXIST_MENU_ERROR;
-
 import java.util.ArrayList;
 import java.util.List;
-import menu.constant.Constant;
+import menu.constant.ErrorMessage;
+import menu.constant.Menu;
 
 public class Coach {
+
+    public static final int COACH_NAME_LENGTH_MIN = 2;
+    public static final int COACH_NAME_LENGTH_MAX = 4;
 
     private final String name;
     private List<String> rejectedMenus;
@@ -27,8 +26,8 @@ public class Coach {
     }
 
     private static void validate(String name) {
-        if (name.length() < COACH_NAME_LENGTH_MIN || name.length() > Constant.COACH_NAME_LENGTH_MAX) {
-            throw new IllegalArgumentException(COACH_NAME_LENGTH_ERROR.getErrorMessage());
+        if (name.length() < COACH_NAME_LENGTH_MIN || name.length() > COACH_NAME_LENGTH_MAX) {
+            throw new IllegalArgumentException(ErrorMessage.COACH_NAME_LENGTH_ERROR.getErrorMessage());
         }
     }
 
@@ -48,14 +47,14 @@ public class Coach {
     }
 
     private void validateExistence(String rejectedMenu) {
-        for (String categoryName : CATEGORIES.keySet()) {
-            List<String> menus = CATEGORIES.get(categoryName);
+        for (Menu menu : Menu.values()) {
+            List<String> menus = menu.getMenus();
             if (menus.contains(rejectedMenu)) {
                 return;
             }
         }
 
-        throw new IllegalArgumentException(NO_EXIST_MENU_ERROR.getErrorMessage());
+        throw new IllegalArgumentException(ErrorMessage.NO_EXIST_MENU_ERROR.getErrorMessage());
     }
 
     public boolean possible(String menu) {

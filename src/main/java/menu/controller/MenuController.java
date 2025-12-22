@@ -1,9 +1,11 @@
 package menu.controller;
 
 import java.util.List;
-import menu.dto.CoachNamesDto;
+import java.util.function.Supplier;
+import menu.domain.Coach;
+import menu.domain.Coaches;
+import menu.domain.Recommendation;
 import menu.service.MenuService;
-import menu.service.RecommendationDto;
 import menu.util.InputParser;
 import menu.view.InputView;
 import menu.view.OutputView;
@@ -19,39 +21,48 @@ public class MenuController {
     public void run() {
         OutputView.printStart();
 
-        CoachNamesDto coachNamesDto = registerCoachNames();
-        List<String> coachNames = coachNamesDto.getCoachNames();
-
-        for (String coachName : coachNames) {
-            registerRejectedMenus(coachName);
+        Coaches coaches = registerCoachNames();
+        for (Coach coach : coaches.getCoaches()) {
+            registerRejectedMenus(coach.getName());
         }
 
-        RecommendationDto result = menuService.getResult();
+        Recommendation result = menuService.getResult();
         OutputView.printResult(result);
     }
 
     private void registerRejectedMenus(String coachName) {
+        retryOnError(() -> {
+            String readRejectedMenus = InputView.readRejectedMenus(coachName);
+            List<String> rejectedMenus = InputParser.parseRejectedMenus(readRejectedMenus);
+
+            menuService.registerRejectedMenus(coachName, rejectedMenus);
+        });
+    }
+
+    private Coaches registerCoachNames() {
+        return retryOnError(() -> {
+            String readCoachNames = InputView.readCoachNames();
+            List<String> coachNames = InputParser.parseCoachNames(readCoachNames);
+
+            return menuService.registerCoachNames(coachNames);
+        });
+    }
+
+    private <T> T retryOnError(Supplier<T> supplier) {
         while (true) {
             try {
-                String readRejectedMenus = InputView.readRejectedMenus(coachName);
-                List<String> rejectedMenus = InputParser.parseRejectedMenus(readRejectedMenus);
-
-                menuService.registerRejectedMenus(coachName, rejectedMenus);
-
-                return;
+                return supplier.get();
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
         }
     }
 
-    private CoachNamesDto registerCoachNames() {
+    private void retryOnError(Runnable runnable) {
         while (true) {
             try {
-                String readCoachNames = InputView.readCoachNames();
-                List<String> coachNames = InputParser.parseCoachNames(readCoachNames);
-
-                return menuService.registerCoachNames(coachNames);
+                runnable.run();
+                return;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }

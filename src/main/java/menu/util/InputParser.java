@@ -24,6 +24,7 @@ public final class InputParser {
 
         List<String> names = parseToElements(rawInput);
 
+        Validator.validateUnique(names);
         Validator.validateCoachNames(names);
 
         return names;
@@ -34,6 +35,7 @@ public final class InputParser {
 
         List<String> menus = parseToElements(rawInput);
 
+        Validator.validateUnique(menus);
         Validator.validateRejectedMenus(menus);
 
         return menus;

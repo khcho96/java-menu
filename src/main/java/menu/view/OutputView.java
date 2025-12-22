@@ -3,7 +3,7 @@ package menu.view;
 import java.util.List;
 import menu.domain.Coach;
 import menu.domain.Coaches;
-import menu.service.RecommendationDto;
+import menu.domain.Recommendation;
 
 public class OutputView {
 
@@ -21,7 +21,7 @@ public class OutputView {
         System.out.println(e.getMessage());
     }
 
-    public static void printResult(RecommendationDto result) {
+    public static void printResult(Recommendation result) {
         System.out.println(RESULT);
 
         List<String> categories = result.getCategories();

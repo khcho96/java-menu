@@ -254,6 +254,15 @@ public class ApplicationTest extends NsTest {
             });
         }
 
+        @ParameterizedTest
+        @ValueSource(strings = {"메시,메시"})
+        void 코치_이름_중복_오류(String input) {
+            assertSimpleTest(() -> {
+                runException(input);
+                assertThat(output()).contains(ErrorMessage.UNIQUE_ERROR.getErrorMessage());
+            });
+        }
+
         @Test
         void 코치별_못먹는_메뉴_형식_오류() {
             assertSimpleTest(() -> {
@@ -278,7 +287,13 @@ public class ApplicationTest extends NsTest {
             });
         }
 
-
+        @Test
+        void 코치별_못먹는_메뉴_중복_오류() {
+            assertSimpleTest(() -> {
+                runException("제이미,제이콥", "김밥,김밥");
+                assertThat(output()).contains(ErrorMessage.UNIQUE_ERROR.getErrorMessage());
+            });
+        }
     }
 
     @Override

@@ -3,10 +3,10 @@ package menu.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import menu.constant.Constant;
-import menu.service.RecommendationDto;
 
 public class Recommendation {
+
+    public static final int RECOMMENDED_MENUS_SIZE = 5;
 
     private final Coaches coaches;
     private final List<String> categories;
@@ -21,18 +21,22 @@ public class Recommendation {
     }
 
     public boolean isDone() {
-        return categories.size() == Constant.RECOMMENDED_MENUS_SIZE;
+        return categories.size() == RECOMMENDED_MENUS_SIZE;
     }
 
-    public boolean possible(String category) {
-        return Collections.frequency(categories, category) != 2;
+    public boolean isPossible(String category) {
+        return Collections.frequency(categories, category) < 2;
     }
 
     public void addCategory(String category) {
         categories.add(category);
     }
 
-    public RecommendationDto getDto() {
-        return new RecommendationDto(coaches, categories);
+    public Coaches getCoaches() {
+        return coaches;
+    }
+
+    public List<String> getCategories() {
+        return categories;
     }
 }
