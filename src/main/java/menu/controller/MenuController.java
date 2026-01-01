@@ -1,6 +1,7 @@
 package menu.controller;
 
 import java.util.List;
+import menu.domain.Result;
 import menu.service.MenuService;
 import menu.util.InputParser;
 import menu.util.Retry;
@@ -17,15 +18,26 @@ public class MenuController {
 
     public void run() {
         OutputView.printStart();
-        registerCoaches();
+        List<String> coachNames = registerCoaches();
 
+        for (String coachName : coachNames) {
+            registerNoEatMenus(coachName);
+        }
 
+        Result result = menuService.recommendMenus();
     }
 
-    private void registerCoaches() {
+    private void registerNoEatMenus(String coachName) {
         Retry.retryUntilSuccess(() -> {
+            List<String> noEatMenuNames = InputParser.parseNoEatMenus(InputView.readNoEatMenus(coachName));
+            menuService.registerNoEatMenus(coachName, noEatMenuNames);
+        });
+    }
+
+    private List<String> registerCoaches() {
+        return Retry.retryUntilSuccess(() -> {
             List<String> names = InputParser.parseCoachNames(InputView.readNames().strip());
-            menuService.registerCoaches(names);
+            return menuService.registerCoaches(names);
         });
     }
 }

@@ -12,7 +12,8 @@ public enum ErrorMessage {
     NO_EXIST_MENU_ERROR("없는 메뉴입니다."),
     MENU_DUPLICATION_ERROR("메뉴가 중복입니다."),
     NO_EAT_MENU_COUNT_ERROR("못 먹는 메뉴는 최대 2개까지 입력할 수 있습니다."),
-    ;
+
+    NO_EXIST_NAME_ERROR("없는 이름입니다.");
 
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
     private final String errorMessage;

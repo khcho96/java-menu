@@ -1,7 +1,10 @@
 package menu.service;
 
 import java.util.List;
+import menu.constant.Menu;
+import menu.domain.Coach;
 import menu.domain.Coaches;
+import menu.domain.Result;
 
 public class MenuService {
 
@@ -12,7 +15,15 @@ public class MenuService {
         return coaches.getCoachNames();
     }
 
-    // 도메인 객체 인스턴스 변수로 저장
+    public void registerNoEatMenus(String coachName, List<String> noEatMenuNames) {
+        Coach coach = coaches.getCoach(coachName);
+        List<Menu> noEatMenus = noEatMenuNames.stream()
+                .map(Menu::from)
+                .toList();
+        coach.addNoEatMenus(noEatMenus);
+    }
 
-    // 메서드
+    public Result recommendMenus() {
+
+    }
 }

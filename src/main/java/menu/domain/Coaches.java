@@ -50,4 +50,11 @@ public class Coaches {
                 .map(Coach::getName)
                 .toList();
     }
+
+    public Coach getCoach(String coachName) {
+        return coaches.stream()
+                .filter(coach -> coach.getName().equals(coachName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NO_EXIST_NAME_ERROR.getErrorMessage()));
+    }
 }
