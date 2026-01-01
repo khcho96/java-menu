@@ -14,7 +14,7 @@ public final class InputParser {
     public static List<String> parseCoachNames(String rawInput) {
         rawInput = rawInput.strip();
 
-        Validator.validateCoachNamesFormat(rawInput);
+        Validator.validateCsvFormat(rawInput);
 
         return Stream.of(rawInput.split(DELIMITER))
                 .map(String::strip)
@@ -24,7 +24,11 @@ public final class InputParser {
     public static List<String> parseNoEatMenus(String rawInput) {
         rawInput = rawInput.strip();
 
-        Validator.validateNoEatMenusFormat(rawInput);
+        if (rawInput.isBlank()) {
+            return List.of();
+        }
+
+        Validator.validateCsvFormat(rawInput);
 
         return Stream.of(rawInput.split(DELIMITER))
                 .map(String::strip)

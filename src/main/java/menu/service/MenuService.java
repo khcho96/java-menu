@@ -20,11 +20,13 @@ public class MenuService {
     }
 
     public void registerNoEatMenus(String coachName, List<String> noEatMenuNames) {
-        Coach coach = coaches.getCoach(coachName);
-        List<Menu> noEatMenus = noEatMenuNames.stream()
-                .map(Menu::from)
-                .collect(Collectors.toList());
-        coach.addNoEatMenus(noEatMenus);
+        if (!noEatMenuNames.isEmpty()) {
+            Coach coach = coaches.getCoach(coachName);
+            List<Menu> noEatMenus = noEatMenuNames.stream()
+                    .map(Menu::from)
+                    .collect(Collectors.toList());
+            coach.addNoEatMenus(noEatMenus);
+        }
     }
 
     public Result recommendMenus() {

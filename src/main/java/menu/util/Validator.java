@@ -8,14 +8,8 @@ public final class Validator {
 
     private Validator() {}
 
-    public static void validateCoachNamesFormat(String rawInput) {
+    public static void validateCsvFormat(String rawInput) {
         if (!rawInput.matches(CSV_FORMAT)) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_FORMAT_ERROR.getErrorMessage());
-        }
-    }
-
-    public static void validateNoEatMenusFormat(String rawInput) {
-        if (!rawInput.matches(CSV_FORMAT) && !rawInput.isBlank()) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_FORMAT_ERROR.getErrorMessage());
         }
     }
