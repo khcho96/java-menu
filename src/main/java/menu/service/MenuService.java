@@ -12,6 +12,8 @@ import menu.domain.Result;
 
 public class MenuService {
 
+    private static final int DAY_COUNT = 5;
+
     private Coaches coaches;
 
     public List<String> registerCoaches(List<String> names) {
@@ -31,7 +33,7 @@ public class MenuService {
 
     public Result recommendMenus() {
         Categories categories = Categories.newInstance();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < DAY_COUNT; i++) {
             recommendMenus(categories);
         }
 
