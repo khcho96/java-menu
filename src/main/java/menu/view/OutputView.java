@@ -3,7 +3,7 @@ package menu.view;
 import menu.domain.Categories;
 import menu.domain.Coach;
 import menu.domain.Coaches;
-import menu.domain.Result;
+import menu.domain.dto.Result;
 
 public class OutputView {
 

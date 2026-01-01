@@ -1,4 +1,7 @@
-package menu.domain;
+package menu.domain.dto;
+
+import menu.domain.Categories;
+import menu.domain.Coaches;
 
 public final class Result {
     private final Categories categories;

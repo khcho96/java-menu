@@ -1,7 +1,7 @@
 package menu.controller;
 
 import java.util.List;
-import menu.domain.Result;
+import menu.domain.dto.Result;
 import menu.service.MenuService;
 import menu.util.InputParser;
 import menu.util.Retry;

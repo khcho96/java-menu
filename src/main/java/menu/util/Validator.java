@@ -4,7 +4,7 @@ import menu.constant.ErrorMessage;
 
 public final class Validator {
 
-    private static final String CSV_FORMAT = "^[가-힣]+ *(, *[가-힣]+ *)*$";
+    private static final String CSV_FORMAT = "^[가-힣\\s]+ *(, *[가-힣\\s]+ *)*$";
 
     private Validator() {}
 

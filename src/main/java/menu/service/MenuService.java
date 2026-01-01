@@ -8,7 +8,7 @@ import menu.constant.Menu;
 import menu.domain.Categories;
 import menu.domain.Coach;
 import menu.domain.Coaches;
-import menu.domain.Result;
+import menu.domain.dto.Result;
 
 public class MenuService {
 
