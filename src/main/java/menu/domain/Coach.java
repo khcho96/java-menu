@@ -9,9 +9,13 @@ import menu.constant.Menu;
 
 public class Coach {
 
+    private static final int NAME_LENGTH_MIN = 2;
+    private static final int NAME_LENGTH_MAX = 4;
+    private static final int NO_EAT_MENU_MIN = 2;
+
     private final String name;
-    private List<Menu> noEatMenus;
-    private List<Menu> recommendedMenus;
+    private final List<Menu> noEatMenus;
+    private final List<Menu> recommendedMenus;
 
     private Coach(String name) {
         this.name = name;
@@ -25,7 +29,7 @@ public class Coach {
     }
 
     private static void validateName(String name) {
-        if (name.length() < 2 || name.length() > 4) {
+        if (name.length() < NAME_LENGTH_MIN || name.length() > NAME_LENGTH_MAX) {
             throw new IllegalArgumentException(ErrorMessage.NAME_LENGTH_ERROR.getErrorMessage());
         }
     }
@@ -46,7 +50,7 @@ public class Coach {
     }
 
     private void validateNoEatMenusCount() {
-        if (noEatMenus.size() > 2) {
+        if (noEatMenus.size() > NO_EAT_MENU_MIN) {
             throw new IllegalArgumentException(ErrorMessage.NO_EAT_MENU_COUNT_ERROR.getErrorMessage());
         }
     }

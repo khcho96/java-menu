@@ -16,5 +16,4 @@ public final class Result {
     public Coaches coaches() {
         return coaches;
     }
-
 }

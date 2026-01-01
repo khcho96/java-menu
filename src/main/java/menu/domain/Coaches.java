@@ -7,6 +7,9 @@ import menu.constant.ErrorMessage;
 
 public class Coaches {
 
+    private static final int COUNT_MIN = 2;
+    private static final int COUNT_MAX = 5;
+
     private final List<Coach> coaches;
 
     private Coaches(List<Coach> coaches) {
@@ -35,13 +38,13 @@ public class Coaches {
     }
 
     private static void validateCoachMaxCount(List<Coach> coaches) {
-        if (coaches.size() > 5) {
+        if (coaches.size() > COUNT_MAX) {
             throw new IllegalArgumentException(ErrorMessage.COACH_MAX_COUNT_ERROR.getErrorMessage());
         }
     }
 
     private static void validateCoachMinCount(List<Coach> coaches) {
-        if (coaches.size() < 2) {
+        if (coaches.size() < COUNT_MIN) {
             throw new IllegalArgumentException(ErrorMessage.COACH_MIN_COUNT_ERROR.getErrorMessage());
         }
     }

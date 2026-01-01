@@ -8,6 +8,8 @@ import menu.constant.Category;
 
 public class Categories {
 
+    private static final int CATEGORY_MAX = 2;
+
     private final List<Category> categories;
 
     private Categories() {
@@ -19,7 +21,7 @@ public class Categories {
     }
 
     public boolean isPossible(Category recommendedCategory) {
-        return Collections.frequency(categories, recommendedCategory) < 2;
+        return Collections.frequency(categories, recommendedCategory) < CATEGORY_MAX;
     }
 
     public void addRecommendedCategory(Category category) {
