@@ -9,6 +9,7 @@ public enum ErrorMessage {
     REJECTED_MENU_COUNT_ERROR("못 먹는 메뉴의 개수는 2개 이하여야 합니다"),
     NO_EXIST_MENU_ERROR("없는 메뉴입니다."),
     UNIQUE_ERROR("중복된 값이 있습니다."),
+    NO_EXIST_CATEGORY_ERROR("없는 카테고리 입니다."),
     ;
 
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";

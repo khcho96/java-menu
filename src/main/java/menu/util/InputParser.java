@@ -31,6 +31,10 @@ public final class InputParser {
     }
 
     public static List<String> parseRejectedMenus(String rawInput) {
+        if (rawInput.isBlank()) {
+            return List.of();
+        }
+
         Validator.validateRejectedMenuFormat(rawInput.strip());
 
         List<String> menus = parseToElements(rawInput);

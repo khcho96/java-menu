@@ -3,7 +3,7 @@ package menu.domain;
 import java.util.ArrayList;
 import java.util.List;
 import menu.constant.ErrorMessage;
-import menu.constant.Menu;
+import menu.constant.Category;
 
 public class Coach {
 
@@ -16,6 +16,7 @@ public class Coach {
 
     private Coach(String name) {
         this.name = name;
+        this.rejectedMenus = new ArrayList<>();
         this.recommendedMenus = new ArrayList<>();
     }
 
@@ -47,7 +48,7 @@ public class Coach {
     }
 
     private void validateExistence(String rejectedMenu) {
-        for (Menu menu : Menu.values()) {
+        for (Category menu : Category.values()) {
             List<String> menus = menu.getMenus();
             if (menus.contains(rejectedMenu)) {
                 return;
@@ -57,7 +58,7 @@ public class Coach {
         throw new IllegalArgumentException(ErrorMessage.NO_EXIST_MENU_ERROR.getErrorMessage());
     }
 
-    public boolean possible(String menu) {
+    public boolean isPossible(String menu) {
         return !recommendedMenus.contains(menu) && !rejectedMenus.contains(menu);
     }
 

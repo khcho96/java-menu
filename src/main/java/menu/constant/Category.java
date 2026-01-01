@@ -1,8 +1,9 @@
 package menu.constant;
 
+import java.util.Arrays;
 import java.util.List;
 
-public enum Menu {
+public enum Category {
     JAPANESE(1, "일식", List.of("규동", "우동", "미소시루", "스시", "가츠동", "오니기리", "하이라이스", "라멘", "오코노미야끼")),
     KOREAN(2, "한식", List.of("김밥", "김치찌개", "쌈밥", "된장찌개", "비빔밥", "칼국수", "불고기", "떡볶이", "제육볶음")),
     CHINESE(3, "중식", List.of("깐풍기", "볶음면", "동파육", "짜장면", "짬뽕", "마파두부", "탕수육", "토마토 달걀볶음", "고추잡채")),
@@ -11,39 +12,31 @@ public enum Menu {
     ;
 
     private final int index;
-    private final String category;
+    private final String name;
     private final List<String> menus;
 
-    Menu(int index, String category, List<String> menus) {
+    Category(int index, String name, List<String> menus) {
         this.index = index;
-        this.category = category;
+        this.name = name;
         this.menus = menus;
     }
 
-    public static Menu fromIndex(int index) {
-        for (Menu menu : Menu.values()) {
-            if (menu.index == index) {
-                return menu;
-            }
-        }
-        throw new IllegalArgumentException();
+    public static Category fromIndex(int index) {
+        return Arrays.stream(values())
+                .filter(category -> category.index == index)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NO_EXIST_CATEGORY_ERROR.getErrorMessage()));
     }
 
-    public static Menu fromCategory(String category) {
-        for (Menu menu : Menu.values()) {
-            if (menu.category.equals(category)) {
-                return menu;
-            }
-        }
-        throw new IllegalArgumentException();
+    public static Category fromName(String name) {
+        return Arrays.stream(values())
+                .filter(category -> category.name.equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NO_EXIST_CATEGORY_ERROR.getErrorMessage()));
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public String getCategory() {
-        return category;
+    public String getName() {
+        return name;
     }
 
     public List<String> getMenus() {

@@ -1,7 +1,7 @@
 package menu.service;
 
 import java.util.List;
-import menu.constant.Menu;
+import menu.constant.Category;
 import menu.domain.Coach;
 import menu.domain.Coaches;
 import menu.domain.Recommendation;
@@ -49,11 +49,10 @@ public class MenuService {
 
     private void addRecommendedMenuEachCoach(String category, Coach coach) {
         while (true) {
-            List<String> candidateMenus = Menu.fromCategory(category).getMenus(); // 카테고리에 맞는 메뉴 후보 가져오기
+            List<String> candidateMenus = Category.fromName(category).getMenus(); // 카테고리에 맞는 메뉴 후보 가져오기
+            String menu = RandomMenuGenerator.generateMenu(candidateMenus); // 후보 중 메뉴 하나 랜덤 선택
 
-            String menu = RandomMenuGenerator.generateMenu(candidateMenus);
-
-            if (coach.possible(menu)) { // 이미 추천했거나 못먹는 음식이라면
+            if (coach.isPossible(menu)) { // 이미 추천했거나 못먹는 음식이라면
                 coach.addRecommendedMenu(menu); // 메뉴 추가
                 break;
             }

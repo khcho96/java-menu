@@ -1,5 +1,6 @@
 package menu.util;
 
+import java.util.HashSet;
 import java.util.List;
 import menu.constant.ErrorMessage;
 
@@ -29,10 +30,6 @@ public final class Validator {
     }
 
     public static void validateRejectedMenuFormat(String input) {
-        if (input.isBlank()) {
-            return;
-        } // 테스트 필요
-
         if (!input.matches(CSV_FORMAT)) {
             throw new IllegalArgumentException(ErrorMessage.FORMAT_ERROR.getErrorMessage());
         }
@@ -45,7 +42,7 @@ public final class Validator {
     }
 
     public static void validateUnique(List<String> inputs) {
-        if (inputs.stream().distinct().count() != inputs.size()) {
+        if (inputs.size() != new HashSet<>(inputs).size()) {
             throw new IllegalArgumentException(ErrorMessage.UNIQUE_ERROR.getErrorMessage());
         }
     }
