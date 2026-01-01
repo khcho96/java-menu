@@ -1,6 +1,7 @@
 package menu.util;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class InputParser {
@@ -17,7 +18,7 @@ public final class InputParser {
 
         return Stream.of(rawInput.split(DELIMITER))
                 .map(String::strip)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public static List<String> parseNoEatMenus(String rawInput) {
@@ -27,6 +28,6 @@ public final class InputParser {
 
         return Stream.of(rawInput.split(DELIMITER))
                 .map(String::strip)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

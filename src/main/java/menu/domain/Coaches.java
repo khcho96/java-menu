@@ -2,6 +2,7 @@ package menu.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import menu.constant.ErrorMessage;
 
 public class Coaches {
@@ -48,7 +49,7 @@ public class Coaches {
     public List<String> getCoachNames() {
         return coaches.stream()
                 .map(Coach::getName)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public Coach getCoach(String coachName) {

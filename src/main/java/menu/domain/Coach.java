@@ -3,6 +3,7 @@ package menu.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import menu.constant.ErrorMessage;
 import menu.constant.Menu;
 
@@ -32,7 +33,7 @@ public class Coach {
     public void addNoEatMenus(List<Menu> noEatMenus) {
         for (Menu noEatMenu : noEatMenus) {
             validateNoEatMenusDuplication(noEatMenu);
-            noEatMenus.add(noEatMenu);
+            this.noEatMenus.add(noEatMenu);
         }
 
         validateNoEatMenusCount();
@@ -77,5 +78,11 @@ public class Coach {
         }
         Coach coach = (Coach) object;
         return Objects.equals(name, coach.name);
+    }
+
+    public List<String> getRecommendedMenus() {
+        return recommendedMenus.stream()
+                .map(Menu::getName)
+                .collect(Collectors.toList());
     }
 }

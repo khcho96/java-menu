@@ -25,6 +25,8 @@ public class MenuController {
         }
 
         Result result = menuService.recommendMenus();
+
+        OutputView.printResult(result);
     }
 
     private void registerNoEatMenus(String coachName) {

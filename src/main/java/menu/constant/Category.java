@@ -2,6 +2,7 @@ package menu.constant;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Category {
 
@@ -37,6 +38,6 @@ public enum Category {
     public List<String> getMenus() {
         return menus.stream()
                 .map(Menu::getName)
-                .toList();
+                .collect(Collectors.toList());
     }
 }
