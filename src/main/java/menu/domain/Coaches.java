@@ -57,4 +57,8 @@ public class Coaches {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NO_EXIST_NAME_ERROR.getErrorMessage()));
     }
+
+    public List<Coach> getCoaches() {
+        return coaches;
+    }
 }

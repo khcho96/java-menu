@@ -1,7 +1,10 @@
 package menu.service;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
+import menu.constant.Category;
 import menu.constant.Menu;
+import menu.domain.Categories;
 import menu.domain.Coach;
 import menu.domain.Coaches;
 import menu.domain.Result;
@@ -24,6 +27,39 @@ public class MenuService {
     }
 
     public Result recommendMenus() {
+        Categories categories = Categories.newInstance();
+        for (int i = 0; i < 5; i++) {
+            recommendMenus(categories);
+        }
 
+        return new Result(categories, coaches);
+    }
+
+    private void recommendMenus(Categories categories) {
+        while (true) {
+            Category category = Category.fromIndex(Randoms.pickNumberInRange(1, 5));
+            if (!categories.isPossible(category)) {
+                continue;
+            }
+
+            recommendMenu(category);
+            break;
+        }
+    }
+
+    private void recommendMenu(Category category) {
+        for (Coach coach : coaches.getCoaches()) {
+            recommendMenuEachCoach(category, coach);
+        }
+    }
+
+    private void recommendMenuEachCoach(Category category, Coach coach) {
+        while (true) {
+            Menu menu = Menu.from(Randoms.shuffle(category.getMenus()).getFirst());
+            if (coach.isPossible(menu)) {
+                coach.addRecommendedMenu(menu);
+                break;
+            }
+        }
     }
 }

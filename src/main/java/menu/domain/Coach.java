@@ -54,8 +54,16 @@ public class Coach {
         return name;
     }
 
-    public boolean isEatable(Menu menu) {
+    public boolean isPossible(Menu menu) {
+        return isEatable(menu) && isUnique(menu);
+    }
+
+    private boolean isEatable(Menu menu) {
         return !noEatMenus.contains(menu);
+    }
+
+    private boolean isUnique(Menu menu) {
+        return !recommendedMenus.contains(menu);
     }
 
     public void addRecommendedMenu(Menu menu) {
